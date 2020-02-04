@@ -228,17 +228,14 @@ Please also take into consideration that rust sometimes intentionally diverges f
 
  1. Should one variant enum be allowed? `(A |) ~= enum _<A> { _0(A) }`
  2. Should empty enum be allowed? `(|) ~= ! ~= core::convert::Infallible`
- 3. Some types are unique up to isomorphism, for example,`(i32, String)|(i32, f64)` and `(i32, String | f64)`. So:
-    1. Should `From` conversions between these types be in stdlib? How to express them, maybe there's a need in variadic generics?
-    2. Is this code correct?
-    
-    ```rust
-    let foo: (i32, f64)|(i32, f32) = ::0(2, 6.0f64);
+ 3. Some types are unique up to isomorphism, for example,`(i32, String)|(i32, f64)` and `(i32, String | f64)`. So is this code correct?
+```rust
+let foo: (i32, f64)|(i32, f32) = ::0(2, 6.0f64);
 
-    match foo {
-        // x is i32, y is f64, z is f32
-        (x, (y, z)) => ...,
-    }
+match foo {
+    // x is i32, y is f64, z is f32
+    (x, (y | z)) => ...,
+}
     ```
 
 # Future possibilities
