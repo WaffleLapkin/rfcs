@@ -313,36 +313,3 @@ where
 Where `x` is some limit, like `32` for arrays or `12` for tuples.
 
 By "simple" I mean "object safe" and without generics/associated types.
-
-## Macros // TODO: more clear topic
-
-Extend `macro_rules!` syntax so this would be possible:
-
-```rust
-pub trait Id {
-    type Id: ?Sized;
-}
-
-impl<T: ?Sized> Id for T {
-    type Id = T;
-}
-
-pub const fn type_eq::<A, B>() 
-where
-    A: Id<Id = B>,
-{}
-
-macro_rules! enum_to_tuple {
-    ( $( $T:ty )|+ ) => ( $( $T ),+ );
-}
-
-macro_rules! tuple_to_enum {
-    ( $( $T:ty ),+ ) => ( $( $T )|+ );
-}
-
-struct A; struct B; struct C;
-
-const _: () = {
-    type_eq::<enum_to_tuple!(A | B | C), (A, B, C)>();
-    type_eq::<tuple_to_enum!(A, B, C), A | B | C>();
-};
