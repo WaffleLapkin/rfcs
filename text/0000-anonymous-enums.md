@@ -76,7 +76,7 @@ The `::n` syntax was chosen because it
 
 ## Working with errors
 ```rust
-fn read<T>() -> Result<T, io::Error | E::Err>
+fn read<T>() -> Result<T, io::Error | T::Err>
 where
     T: FromStr,
 {
