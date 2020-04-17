@@ -161,6 +161,10 @@ Also, see [Implementing traits for `A | ... | T`][implementing-traits].
 
 The section should return to the examples given in the previous section, and explain more fully how the detailed proposal makes those examples work. -->
 
+## Repr
+
+// TODO
+
 # Drawbacks
 [drawbacks]: #drawbacks
 
