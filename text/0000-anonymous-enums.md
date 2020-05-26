@@ -148,6 +148,40 @@ Also semantics of `Ord` are questionable.
 
 Also, see [Implementing traits for `A | ... | T`][implementing-traits].
 
+## Demo
+
+There is [Demo of anonymous enums][demo] simulated with macros.
+
+```rust
+fn fun(arg: Ae![i32 | i32 | String]) -> String {
+    match arg {
+        ae_pat!(::0(int)) | ae_pat!(::1(int)) => int.to_string(),
+        ae_pat!(::2(string)) => string,
+    }
+}
+
+#[test]
+fn it_works() {
+    assert_eq!(
+        fun(ae!(::0(1))),
+        "1"
+    );
+
+    assert_eq!(
+        fun(ae!(::1(42))),
+        "42"
+    );
+
+    assert_eq!(
+        fun(ae!(::2(String::from("hi")))),
+        "hi"
+    );
+}
+```
+(and more)
+
+[demo]: https://github.com/WaffleLapkin/anon_enum
+
 # Reference-level explanation
 [reference-level-explanation]: #reference-level-explanation
 
