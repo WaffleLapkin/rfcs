@@ -219,19 +219,19 @@ wait till the end then we will have more type information available.
 
 In my proposed solution, we eliminate the phase distinction. Instead,
 we simply track *pending constraints*. We are free to attempt to
-resolve pending constraints whenever desired. In paricular, whenever
+resolve pending constraints whenever desired. In particular, whenever
 we find we need more type information to proceed with some
 type-overloaded operation, rather than reporting an error we can try
 and resolve pending constraints. If that helps give more information,
 we can carry on. Once we reach the end of the function, we must then
-resolve all pending constriants that have not yet been resolved for
+resolve all pending constraints that have not yet been resolved for
 some other reason.
 
 Note that there is some interaction with the distinction between input
 and output type parameters discussed in the previous
 example. Specifically, we must never *infer* the value of the `Self`
 type parameter based on the impls in scope. This is because it would
-cause *crate concatentation* to potentially lead to compilation errors
+cause *crate concatenation* to potentially lead to compilation errors
 in the form of inference failure.
 
 ## Properties
@@ -242,7 +242,7 @@ There are important properties I would like to guarantee:
   values for all of its type parameters, there should always be at
   most one applicable impl. This should remain true even when unknown,
   additional crates are loaded.
-- **Crate concatentation:** It should always be possible to take two
+- **Crate concatenation:** It should always be possible to take two
   creates and combine them without causing compilation errors. This
   property
 
@@ -527,7 +527,7 @@ slightly modified example:
 As before, we'll start out with a type of `Monster`, but this type the
 method `move_to_room()` has a receiver type of `Gc<Monster>`. This
 doesn't match cases 1, 2, or 3, so we proceed to case 4 and *unwind*
-by one adustment. Since the most recent adjustment was to deref from
+by one adjustment. Since the most recent adjustment was to deref from
 `Gc<Monster>` to `Monster`, we are left with a type of
 `Gc<Monster>`. We now search again. This time, we match case 1. So the
 final result is `Mob::move_to_room(victim, room)`. This last case is
@@ -660,7 +660,7 @@ extent.
 ## The "resolve" algorithm
 
 The basis for the coherence check, method lookup, and vtable lookup
-algoritms is the same function, called *RESOLVE*. The basic idea is
+algorithms is the same function, called *RESOLVE*. The basic idea is
 that it takes a set of obligations and tries to resolve them. The result
 is four sets:
 

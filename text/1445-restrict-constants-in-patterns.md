@@ -50,7 +50,7 @@ alternatives.
 
 [ls]: https://github.com/rust-lang/rfcs/blob/master/text/1122-language-semver.md#underspecified-language-semantics
 [crater run]: https://gist.github.com/nikomatsakis/26096ec2a2df3c1fb224
-[internals thread]: https://internals.rust-lang.org/t/how-to-handle-pattern-matching-on-constants/2846)
+[internals thread]: https://internals.rust-lang.org/t/how-to-handle-pattern-matching-on-constants/2846
 
 # Motivation
 [motivation]: #motivation
@@ -165,7 +165,7 @@ are two main disadvantages:
    permit associated constants or generic integers to be used in a
    match statement.
 
-#### Disadvantage: Weakened abstraction bounary
+#### Disadvantage: Weakened abstraction boundary
 
 The single biggest concern with structural equality is that it
 introduces two distinct notions of equality: the `==` operator, based

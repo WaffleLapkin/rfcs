@@ -153,7 +153,7 @@ following:
 > type parameter.
 >
 > Rust requires that for any given trait and any given type, there is at most one
-> implmentation of that trait. An important piece of this is that we disallow
+> implementation of that trait. An important piece of this is that we disallow
 > implementing a trait from another crate for a type parameter.
 >
 > Rust's orphan rule always permits an impl if either the trait or the type being
@@ -285,7 +285,7 @@ applies to `std`, `Vec<T>` now applies to types from `std` and any other crate.
   `impl<T> SomeTrait<LocalType, T> for ForeignType`, because no sibling crate
   can write an overlapping impl. However, this is not something that the
   majority of library authors are aware of, and requires API designers to order
-  their type parameters based on how likely they are to be overidden by other
+  their type parameters based on how likely they are to be overridden by other
   crates.
 
   We could instead provide a mechanism for traits to opt into a redesigned

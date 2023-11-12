@@ -81,7 +81,7 @@ many locations.
 #### Strings
 
 In a post-DST world, the string type will actually be a library-defined type,
-`Str` (or similarly named). Strings will no longer be a lanuage feature or a
+`Str` (or similarly named). Strings will no longer be a language feature or a
 language-defined type. This implies that any methods on strings must be in the
 same crate that defined the `Str` type, or done through extension traits.
 
@@ -164,7 +164,7 @@ algorithms apart from the default sorting algorithm.
 #### FromStr
 
 This trait and module are left out because strings are left out. All types in
-libmini can have their implemention of FromStr in the crate which implements
+libmini can have their implementation of FromStr in the crate which implements
 strings
 
 #### Floats
@@ -383,7 +383,7 @@ various environments seems beneficial.
   etc. This route has may have the problem of "multiple standard libraries"
   in that code compatible with the "libc libstd" is not necessarily compatible
   with the "no libc libstd". Asserting that a crate is compatible with multiple
-  profiles would involve requiring multiple compliations.
+  profiles would involve requiring multiple compilations.
 
 * Removing libstd entirely. If the standard library is simply a facade, the
   compiler could theoretically only inject a select number of crates into the

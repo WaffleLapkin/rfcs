@@ -4,7 +4,7 @@
 
 # History
 
-2015.09.18 -- This RFC was partially superceded by [RFC 1238], which
+2015.09.18 -- This RFC was partially superseded by [RFC 1238], which
 removed the parametricity-based reasoning in favor of an attribute.
 
 [RFC 1238]: https://github.com/rust-lang/rfcs/blob/master/text/1238-nonparametric-dropck.md
@@ -184,7 +184,7 @@ expressing the constraint that one lifetime be strictly greater than
 another lifetime or type (the form `'a:'b` only formally says that
 `'a` must live *at least* as long as `'b`).
 
-Thus, client code like that in `unwary_client` can inadvertantly set
+Thus, client code like that in `unwary_client` can inadvertently set
 up scenarios where Sylvester's code may break, and Sylvester might be
 completely unaware of the vulnerability.
 

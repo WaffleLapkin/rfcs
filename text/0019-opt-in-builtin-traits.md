@@ -2,6 +2,9 @@
 - RFC PR #: [rust-lang/rfcs#19](https://github.com/rust-lang/rfcs/pull/19), [rust-lang/rfcs#127](https://github.com/rust-lang/rfcs/pull/127)
 - Rust Issue #: [rust-lang/rust#13231](https://github.com/rust-lang/rust/issues/13231)
 
+**Note:** The `Share` trait described in this RFC was later
+[renamed to `Sync`](0123-share-to-threadsafe.md).
+
 # Summary
 
 The high-level idea is to add language features that simultaneously
@@ -71,8 +74,8 @@ opt-in. There are two main reasons for my concern:
 
 To elaborate on those two points: With respect to parallelization: for
 the most part, Rust types are threadsafe "by default". To make
-something non-threadsafe, you must employ unsychronized interior
-mutability (e.g., `Cell`, `RefCell`) or unsychronized shared ownership
+something non-threadsafe, you must employ unsynchronized interior
+mutability (e.g., `Cell`, `RefCell`) or unsynchronized shared ownership
 (`Rc`). In both cases, there are also synchronized variants available
 (`Mutex`, `Arc`, etc). This implies that we can make APIs to enable
 intra-task parallelism and they will work ubiquitously, so long as
@@ -80,7 +83,7 @@ people avoid `Cell` and `Rc` when not needed. Explicit opt-in
 threatens that future, however, because fewer types will implement
 `Share`, even if they are in fact threadsafe.
    
-With respect to extensibility, it is partiularly worrisome that if a
+With respect to extensibility, it is particularly worrisome that if a
 library forgets to implement `Send` or `Share`, downstream clients are
 stuck. They cannot, for example, use a newtype wrapper, because it
 would be illegal to implement `Send` on the newtype. This implies that
@@ -116,14 +119,14 @@ All three of these (`Snapshot`, `NoManaged`, `NoDrop`) can be easily
 defined using traits with default impls.
 
 A final, somewhat weaker, motivator is aesthetics. Ownership has allowed
-us to move threading almost entirely into libaries. The one exception
+us to move threading almost entirely into libraries. The one exception
 is that the `Send` and `Share` types remain built-in. Opt-in traits
 makes them *less* built-in, but still requires custom logic in the
 "impl matching" code as well as special safety checks when
 `Safe` or `Share` are implemented.
 
 After the changes I propose, the only traits which would be
-specicially understood by the compiler are `Copy` and `Sized`. I
+specifically understood by the compiler are `Copy` and `Sized`. I
 consider this acceptable, since those two traits are intimately tied
 to the core Rust type system, unlike `Send` and `Share`.
 
@@ -198,7 +201,7 @@ that `T` implements `Foo`. This allows recursive types like
     struct List<T> { data: T, next: Option<List<T>> }
 
 to be checked successfully. Otherwise, we would recursive infinitely.
-(This procedure is directly analagous to what the existing
+(This procedure is directly analogous to what the existing
 `TypeContents` code does.)
 
 Note that there exist types that expand to an infinite tree of types.
@@ -367,20 +370,20 @@ traits. In effect, opt-in is anti-modular in its own way.
 To be more specific, imagine that library A wishes to define a
 `Untainted` trait, and it specifically opts out of `Untainted` for
 some base set of types. It then wishes to have routines that only
-operate on `Untained` data. Now imagine that there is some other
+operate on `Untainted` data. Now imagine that there is some other
 library B that defines a nifty replacement for `Vector`,
 `NiftyVector`. Finally, some library C wishes to use a
 `NiftyVector<uint>`, which should not be considered tainted, because
 it doesn't reference any tainted strings. However, `NiftyVector<uint>`
 does not implement `Untainted` (nor can it, without either library A
-or libary B knowing about one another). Similar problems arise for any
+or library B knowing about one another). Similar problems arise for any
 trait, of course, due to our coherence rules, but often they can be
 overcome with new types. Not so with `Send` and `Share`.
 
 #### Other use cases
 
 Part of the design involves making space for other use cases. I'd like
-to skech out how some of those use cases can be implemented briefly.
+to sketch out how some of those use cases can be implemented briefly.
 This is not included in the *Detailed design* section of the RFC
 because these traits generally concern other features and would be
 added under RFCs of their own.

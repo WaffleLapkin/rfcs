@@ -1,4 +1,4 @@
-- Start Date: 2015-1-30
+- Start Date: 2015-01-30
 - RFC PR: [rust-lang/rfcs#771](https://github.com/rust-lang/rfcs/pull/771)
 - Rust Issue: [rust-lang/rust#24443](https://github.com/rust-lang/rust/issues/24443)
 
@@ -40,7 +40,7 @@ These wrapper structs exist to allow future backwards-compatible changes, and hi
 
 # Drawbacks
 
-Although a tiny amount of code, it still does come with a testing, maintainance, etc. cost.
+Although a tiny amount of code, it still does come with a testing, maintenance, etc. cost.
 
 It's already possible to do this via `Some(x).into_iter()`, `std::iter::repeat(x).take(1)` (for `x: Clone`), `vec![x].into_iter()`, various contraptions involving `iterate`...
 

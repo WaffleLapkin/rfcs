@@ -8,7 +8,7 @@
 
 [RFC 505] introduced certain conventions around documenting Rust projects. This
 RFC augments that one, and a full text of the older one combined with these
-modfications is provided below.
+modifications is provided below.
 
 [RFC 505]: https://github.com/rust-lang/rfcs/blob/master/text/0505-api-comment-conventions.md
 
@@ -192,7 +192,7 @@ pub mod option;
 /// assert_eq!(&[5], slice);
 /// ```
 ///
-/// A more compelx example. In this case, it’s the same example, because this
+/// A more complex example. In this case, it’s the same example, because this
 /// is a pretty trivial function, but use your imagination.
 ///
 /// ```
@@ -350,7 +350,7 @@ nothing else. When using `mod` blocks, prefer `///` outside of the block:
 
 ```rust
 /// This module contains tests
-mod test {
+mod tests {
     // ...
 }
 ```
@@ -358,7 +358,7 @@ mod test {
 over
 
 ```rust
-mod test {
+mod tests {
     //! This module contains tests
 
     // ...

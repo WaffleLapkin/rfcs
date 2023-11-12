@@ -167,7 +167,7 @@ It is illegal to define `links` without also defining `build`.
 A number of native dependencies have various dependencies depending on what
 platform they're building for. For example, libcurl does not depend on OpenSSL
 on Windows, but it is a common dependency on unix-based systems. To this end,
-Cargo will gain support for platform-specific dependencies, solving constriant 7
+Cargo will gain support for platform-specific dependencies, solving constraint 7
 above:
 
 ```toml
@@ -258,7 +258,7 @@ separate set of dependencies solves a number of constraints:
 
 * When cross-compiling, the build tool as well as all of its dependencies are
   required to be built for the host architecture instead of the target
-  architecture. A clear deliniation will indicate precisely what dependencies
+  architecture. A clear delineation will indicate precisely what dependencies
   need to be built for the host architecture.
 * Common packages, such as one to build `cmake`-based dependencies, can develop
   conventions around filesystem hierarchy formats to require minimum
@@ -394,7 +394,7 @@ directly. Additionally, packages using `*-sys` packages should not declare a
 ## Phasing strategy
 
 The modifications to the `build` command are breaking changes to Cargo. To ease
-the transition, the build comand will be join'd to the root path of a crate, and
+the transition, the build command will be join'd to the root path of a crate, and
 if the file exists and ends with `.rs`, it will be compiled as describe above.
 Otherwise a warning will be printed and the fallback behavior will be
 executed.
@@ -413,7 +413,7 @@ would look like with respect to its set of C dependencies.
 
 ## Case study: generated code
 
-As the release of Rust 1.0 comes closer, the use of complier plugins has become
+As the release of Rust 1.0 comes closer, the use of compiler plugins has become
 increasingly worrying over time. It is likely that plugins will not be available
 by default in the stable and beta release channels of Rust. Many core Cargo
 packages in the ecosystem today, such as gl-rs and iron, depend on plugins
